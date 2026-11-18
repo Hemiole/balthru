@@ -1,6 +1,29 @@
 
 import streamlit as st
 
+def faire_dico(age,educ,envi,carriere,ambi,ouver,extra,agrea,cons,chrono,sponta,express,langage):
+    dico = {
+        "age": age,
+        "education": educ,
+        "environnement": envi,
+        "carriere": carriere,
+        "ambition": ambi,
+        "ouverture": ouver,
+        "extraversion": extra,
+        "agreabilite": agrea,
+        "consciensiosite": cons,
+        "chronotype": chrono,
+        "spontaneite": sponta,
+        "expressivite": express,
+        "langage": langage
+    }
+    return dico
+
+def analyse(a, b):
+    return "placeholder"
+
+
+
 st.title("Love(i,a)")
 st.write("Calculez votre compatibilité amoureuse")
 
@@ -40,4 +63,8 @@ with st.form("Formulaire"):
     envoyer = st.form_submit_button("Calculer")
 
 if envoyer:
+    dico_a = faire_dico(a_age, a_education, a_environnement, a_carriere, a_ambition, a_ouverture, a_extraversion, a_agreabilite, a_consciensiosite, a_chronotype, a_spontaneite, a_expressivite, a_langage)
+    dico_b = faire_dico(b_age, b_education, b_environnement, b_carriere, b_ambition, b_ouverture, b_extraversion, b_agreabilite, b_consciensiosite, b_chronotype, b_spontaneite, b_expressivite, b_langage)
+    compatibilite = analyse(dico_a, dico_b)
+    st.write(f"Compatibilité amoureuse : {compatibilite}")
     st.success("Merci !")
