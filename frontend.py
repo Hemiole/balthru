@@ -1,25 +1,155 @@
 
+from unittest import case
+
 import streamlit as st
 
-def faire_dico(age,educ,envi,carriere,ambi,ouver,extra,agrea,cons,chrono,sponta,express,langage):
-    dico = {
-        "age": age,
-        "education": educ,
-        "environnement": envi,
-        "carriere": carriere,
-        "ambition": ambi,
-        "ouverture": ouver,
-        "extraversion": extra,
-        "agreabilite": agrea,
-        "consciensiosite": cons,
-        "chronotype": chrono,
-        "spontaneite": sponta,
-        "expressivite": express,
-        "langage": langage
-    }
-    return dico
+def faire_row(a_age,a_educ,a_envi,a_carriere,a_ambi,a_ouver,a_extra,a_agrea,a_cons,a_chrono,a_sponta,a_express,a_langage,b_age,b_educ,b_envi,b_carriere,b_ambi,b_ouver,b_extra,b_agrea,b_cons,b_chrono,b_sponta,b_express,b_langage):
+    #conversion education
+    match a_educ:
+        case "Bac ou moins":
+            a_educ = 0
+        case "Bac +1/2":
+            a_educ = 1
+        case "Bac +3":
+            a_educ = 2
+        case "Bac +5":
+            a_educ = 3
+        case "Doctorat":
+            a_educ = 4
 
-def analyse(a, b):
+    match b_educ:
+        case "Bac ou moins":
+            b_educ = 0
+        case "Bac +1/2":
+            b_educ = 1
+        case "Bac +3":
+            b_educ = 2
+        case "Bac +5":
+            b_educ = 3
+        case "Doctorat":
+            b_educ = 4
+
+
+    #conversion environnement
+    match a_envi:
+        case "Urbain":
+            a_envi = 0
+        case "Suburbain":
+            a_envi = 1
+        case "Rural":
+            a_envi = 2
+    match b_envi:
+        case "Urbain":
+            b_envi = "Urban"
+        case "Suburbain":
+            b_envi = "Suburban"
+        case "Rural":
+            b_envi = "Rural"
+
+
+    #conversion carriere:
+    match a_carriere:
+        case "Finance":
+            a_carriere = "Finance"
+        case "Ingénierie":
+            a_carriere = "Engineering"
+        case "Santé":
+            a_carriere = "Healthcare"
+        case "Technologie":
+            a_carriere = "Tech"
+        case "Marketing":
+            a_carriere = "Marketing"
+        case "Entreprenariat":
+            a_carriere = "Entrepreneurship"
+        case "Science":
+            a_carriere = "Science"
+        case "Droit":
+            a_carriere = "Law"
+        case "Arts":
+            a_carriere = "Arts"
+        case "Education":
+            a_carriere = "Education"
+
+    match b_carriere:
+            case "Finance":
+                b_carriere = "Finance"
+            case "Ingénierie":
+                b_carriere = "Engineering"
+            case "Santé":
+                b_carriere = "Healthcare"
+            case "Technologie":
+                b_carriere = "Tech"
+            case "Marketing":
+                b_carriere = "Marketing"
+            case "Entreprenariat":
+                b_carriere = "Entrepreneurship"
+            case "Science":
+                b_carriere = "Science"
+            case "Droit":
+                b_carriere = "Law"
+            case "Arts":
+                b_carriere = "Arts"
+            case "Education":
+                b_carriere = "Education"
+
+
+    #conversion langage
+    match a_langage:
+        case "Cadeaux":
+            a_langage = "Receiving Gifts"
+        case "Moments":
+            a_langage = "Quality Time"
+        case "Services":
+            a_langage = "Acts of Service"
+        case "Toucher":
+            a_langage = "Physical Touch"
+        case "Affirmation":
+            a_langage = "Words of Affirmation"
+
+    match b_langage:
+            case "Cadeaux":
+                b_langage = "Receiving Gifts"
+            case "Moments":
+                b_langage = "Quality Time"
+            case "Services":
+                b_langage = "Acts of Service"
+            case "Toucher":
+                b_langage = "Physical Touch"
+            case "Affirmation":
+                b_langage = "Words of Affirmation"
+
+
+    row = {
+        "a_age": a_age,
+        "a_education": a_educ,
+        "a_location": a_envi,
+        "a_career": a_carriere,
+        "a_ambition": a_ambi,
+        "a_openness": a_ouver,
+        "a_extraversion": a_extra,
+        "a_agreeableness": a_agrea,
+        "a_conscientiousness": a_cons,
+        "a_chronotype": a_chrono,
+        "a_spontaneity": a_sponta,
+        "a_expressiveness": a_express,
+        "a_love_language": a_langage,
+        "b_age": b_age,
+        "b_education": b_educ,
+        "b_location": b_envi,
+        "b_career": b_carriere,
+        "b_ambition": b_ambi,
+        "b_openness": b_ouver,
+        "b_extraversion": b_extra,
+        "b_agreeableness": b_agrea,
+        "b_conscientiousness": b_cons,
+        "b_chronotype": b_chrono,
+        "b_spontaneity": b_sponta,
+        "b_expressiveness": b_express,
+        "b_love_language": b_langage
+    }
+    return row
+
+def analyse(profils):
     return "placeholder"
 
 
@@ -63,8 +193,8 @@ with st.form("Formulaire"):
     envoyer = st.form_submit_button("Calculer")
 
 if envoyer:
-    dico_a = faire_dico(a_age, a_education, a_environnement, a_carriere, a_ambition, a_ouverture, a_extraversion, a_agreabilite, a_consciensiosite, a_chronotype, a_spontaneite, a_expressivite, a_langage)
-    dico_b = faire_dico(b_age, b_education, b_environnement, b_carriere, b_ambition, b_ouverture, b_extraversion, b_agreabilite, b_consciensiosite, b_chronotype, b_spontaneite, b_expressivite, b_langage)
-    compatibilite = analyse(dico_a, dico_b)
+    ligne = faire_row(a_age, a_education, a_environnement, a_carriere, a_ambition, a_ouverture, a_extraversion, a_agreabilite, a_consciensiosite, a_chronotype, a_spontaneite, a_expressivite, a_langage, b_age, b_education, b_environnement, b_carriere, b_ambition, b_ouverture, b_extraversion, b_agreabilite, b_consciensiosite, b_chronotype, b_spontaneite, b_expressivite, b_langage)
+    compatibilite = analyse(ligne) 
     st.write(f"Compatibilité amoureuse : {compatibilite}")
+    st.write(ligne)
     st.success("Merci !")
